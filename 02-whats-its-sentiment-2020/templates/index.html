@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>What's its Sentiment</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        textarea{
+            text-align: left;
+        }
+
+        #text{
+            width: 75%;
+            margin:auto;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>What's its Sentiment</h1>
+    <div>
+        <form method="POST" enctype=multipart/form-data action="/send_text/">
+            <p>Add a phrase or paragraph of any length</p>
+            <textarea name="text" rows="10" cols="50"></textarea>
+            <br>
+            <br>
+            <input type="submit" value="Analyse"/>
+        </form>
+    </div>
+    {% if text|length > 0  %}
+        <div>
+
+            <h4>Successfully analysed text</h4>
+            <h4>You entered: </h4>
+            <p id="text">
+                {{ text }}
+            </p>
+            <br>
+            {% if prediction > 55  %}
+                <h2>Positive</h2>
+            {% elif prediction < 40  %}
+                <h2> Negative</h2>
+            {% else %}
+                <h2> Neutral</h2>
+            {% endif %}
+
+        <h4>The likelihood of the text being a positive sentiment is {{ prediction }}%</h4>
+
+        </div>
+    {% endif %}
+</body>
+</html>

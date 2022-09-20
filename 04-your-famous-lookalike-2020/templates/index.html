@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lookalike</title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+        form{
+            text-align: left;
+            width:50%;
+            margin-left: 50%;
+            transform: translateX(-12%);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Your famous lookalike</h1>
+    <div>
+        <form method="POST" enctype=multipart/form-data action="/upload_image/">
+            <p>Insert your image here</p>
+            <input type="file" name="file"/>
+            <br>
+            <br>
+            <input type="submit" value="Upload"/>
+        </form>
+    </div>
+    {% if filename|length > 0  %}
+    <div>
+        <h4>Successfully uploaded file.</h4>
+        <br>
+        <h4>{{ celebrity_name }} was the celebrity with facial features closest to you.</h4>
+        <h4> Similarity percentage = {{ similarity }}%</h4>
+        <img src="{{ prediction }}" alt="closest_celeb" width="500">
+
+
+    </div>
+    {% endif %}
+</body>
+</html>
